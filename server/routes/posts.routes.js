@@ -9,14 +9,14 @@ import {
 
 const router = Router();
 
-router.get("/posts", getPosts);
+router.get("/api/posts", getPosts);
 
-router.post("/posts", createPost);
+router.post("/api/posts", createPost);
 
-router.put("/posts/:id", updatePost);
+router.put("/api/posts/:id", updatePost);
 
-router.delete("/posts/:id", deletePost);
+router.delete("/api/posts/:id", deletePost);
 
-router.get("/posts/:id", getPost);
+router.get("/api/posts/:id", getPost);
 
 export default router;
