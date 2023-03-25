@@ -20,7 +20,7 @@ app.use(
 );
 
 //Rutas
-app.use("/api", postRoutes); //Llama a las rutas
+app.use(postRoutes); //Llama a las rutas
 
 app.use(express.static(join(__dirname, "../client/build"))); //Esto permite que el server lea el front
 
