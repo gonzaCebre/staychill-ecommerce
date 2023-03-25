@@ -6,7 +6,7 @@ import fs from "fs-extra"; //Permite manejar archivos del sistema
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().maxTimeMS(20000); //El comando '.find()' devuelve lo que haya guardado en esa coleccion
+    const posts = await Post.find(); //El comando '.find()' devuelve lo que haya guardado en esa coleccion
     return res.send(posts);
   } catch (error) {
     console.log(error.message);
