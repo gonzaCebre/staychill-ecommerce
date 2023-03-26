@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload"; //Modulo que nos permite subir imagenes
 import postRoutes from "./routes/posts.routes.js";
-import path from "path";
-import { dirname } from "path";
+import { dirname, join } from "path";
+
 import { fileURLToPath } from "url";
 
 const app = express(); //Inicializa el servidor
@@ -12,7 +12,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url)); //Esta linea de codig
 //Middlewares
 app.use(express.json()); //Permite entender los jsons
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(
   fileUpload({
@@ -21,14 +20,14 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "../client/build"))); //Esto permite que el server lea el front
-
 //Rutas
 app.use("/api", postRoutes); //Llama a las rutas
 /* app.use(postRoutes); //Llama a las rutas */
 
-/* app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "../client/build/index.html"));
+app.use(express.static(join(__dirname, "./client/build"))); //Esto permite que el server lea el front
+
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "./client/build/index.html"));
 }); //Esto permite que como la app se va a servir desde el backend, toda peticion pase por el front
- */
+
 export default app;
