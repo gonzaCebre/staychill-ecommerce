@@ -24,10 +24,10 @@ app.use(
 
 app.use(express.static(join(__dirname, "../client/build"))); //Esto permite que el server lea el front
 
-/* app.get("*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(join(__dirname, "../client/build/index.html"));
 }); //Esto permite que como la app se va a servir desde el backend, toda peticion pase por el front
- */
+
 //Rutas
 app.use("/api", postRoutes); //Llama a las rutas
 
