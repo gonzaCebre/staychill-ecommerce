@@ -11,7 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url)); //Esta linea de codig
 
 //Middlewares
 app.use(express.json()); //Permite entender los jsons
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 app.use(
   fileUpload({
@@ -20,6 +20,9 @@ app.use(
   })
 );
 
+//Rutas
+app.use(postRoutes); //Llama a las rutas
+
 /* app.use(postRoutes); //Llama a las rutas */
 
 app.use(express.static(join(__dirname, "../client/build"))); //Esto permite que el server lea el front
@@ -27,8 +30,5 @@ app.use(express.static(join(__dirname, "../client/build"))); //Esto permite que 
 app.get("*", (req, res) => {
   res.sendFile(join(__dirname, "../client/build/index.html"));
 }); //Esto permite que como la app se va a servir desde el backend, toda peticion pase por el front
-
-//Rutas
-app.use("/api", postRoutes); //Llama a las rutas
 
 export default app;
