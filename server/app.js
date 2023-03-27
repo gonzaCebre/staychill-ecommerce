@@ -9,6 +9,12 @@ import { fileURLToPath } from "url";
 const app = express(); //Inicializa el servidor
 const __dirname = dirname(fileURLToPath(import.meta.url)); //Esta linea de codigo nos da cual es la ruta raiz de todo el proyecto
 
+app.use(express.static(join(__dirname, "../client/build"))); //Esto permite que el server lea el front
+
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "../client/build/index.html"));
+}); //Esto permite que como la app se va a servir desde el backend, toda peticion pase por el front
+
 //Middlewares
 app.use(express.json()); //Permite entender los jsons
 app.use(cors());
@@ -23,11 +29,5 @@ app.use(
 //Rutas
 app.use("/api", postRoutes); //Llama a las rutas
 /* app.use(postRoutes); //Llama a las rutas */
-
-app.use(express.static(join(__dirname, "./client/build"))); //Esto permite que el server lea el front
-
-app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "./client/build/index.html"));
-}); //Esto permite que como la app se va a servir desde el backend, toda peticion pase por el front
 
 export default app;
